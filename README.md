@@ -6,7 +6,7 @@ Este projeto implementa e compara dois algoritmos de substituição de páginas:
 
 - Rai Ferreira
 - Isabelly Pinheiro
-- Elias Sombra
+- Elias De Almeida 
 
 ## Descrição
 
@@ -39,19 +39,9 @@ O projeto gera uma sequência de referências de páginas aleatórias e calcula 
 
 3. O script gerará uma sequência de referências de páginas, salvará em um arquivo `references.txt` e imprimirá o número de faltas de página para os algoritmos FIFO e Aging.
 
-## Exemplo de Saída
-
-```
-Número de Molduras | Faltas FIFO | Faltas Aging
-5                  | 899         | 899
-10                 | 798         | 789
-25                 | 477         | 510
-30                 | 407         | 419
-```
 
 ## Conclusões
 
-- **Desempenho Similar com Poucas Molduras**: Ambos os algoritmos têm desempenho similar com um número muito limitado de molduras.
 - **Melhoria com o Aumento das Molduras**: O número de faltas de página diminui para ambos os algoritmos à medida que o número de molduras aumenta.
-- **FIFO vs. Aging**: FIFO teve um desempenho ligeiramente melhor com um número maior de molduras, enquanto Aging teve um desempenho melhor com um número intermediário de molduras.
+
 

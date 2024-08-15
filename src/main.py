@@ -1,3 +1,4 @@
+import pandas as pd
 from random import choices
 from collections import deque
 
@@ -96,7 +97,7 @@ def compare_algorithms(num_references, num_pages, page_frames_list):
     list: Lista de tuplas contendo o número de molduras de páginas, faltas de página para FIFO e faltas de página para Aging.
     """
     references = generate_references(num_references, num_pages)
-    save_references_to_file(references, "references.txt")
+    save_references_to_file(references, f"references{num_pages}.txt")
 
     results = []
     for frames in page_frames_list:
@@ -107,11 +108,28 @@ def compare_algorithms(num_references, num_pages, page_frames_list):
     return results
 
 if __name__ == '__main__':
+    print('rodou')
     num_references = 1000
-    num_pages = 50
-    page_frames_list = [5, 10, 25, 30]
+    num_pages = [150, 300, 450, 600]
+    # page_frames_list = [5, 10, 25, 30, 35, 40, 45, 50]
+    page_frames_list = list(range(1, 151))
+    # print(page_frames_list)
 
-    results = compare_algorithms(num_references, num_pages, page_frames_list)
-    print("Número de Molduras | Faltas FIFO | Faltas Aging")
-    for frames, fifo_faults, aging_faults in results:
-        print(f"{frames:<18} | {fifo_faults:<11} | {aging_faults:<12}")
+    # print(aging([2,4,5,2,4],3))
+
+    '''
+    2 144  1001 0000
+    4 64 32  1001 0000
+    5 128 32
+    '''
+    results = {}
+    for page in num_pages:
+        # print(page)
+        # print("Número de Molduras | Faltas FIFO | Faltas Aging")
+        results[page] = compare_algorithms(num_references, page, page_frames_list)
+        # for frames, fifo_faults, aging_faults in results[page]:
+        #     print(f"{frames:<18} | {fifo_faults:<11} | {aging_faults:<12}")
+    
+    for key, values in results.items():
+        df = pd.DataFrame(values, columns=['Frame', 'fifo_faults', 'aging_faults'])
+        df.to_csv(f'results{key}.csv', index=False)
